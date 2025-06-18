@@ -1,0 +1,199 @@
+/* --- GERAL E FONTES --- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --color-primary: #0d47a1;
+    --color-secondary: #1976d2;
+    --color-background: #eef2f5;
+    --color-page-bg: #ffffff;
+    --color-text: #212529;
+    --color-text-light: #adb5bd;
+    --color-shadow: rgba(0, 0, 0, 0.08);
+    --border-radius-main: 10px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    box-sizing: border-box;
+}
+
+/* --- ESTRUTURA DA PÁGINA --- */
+.page-container {
+    background-color: var(--color-page-bg);
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- CABEÇALHO --- */
+header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0.8rem 2rem;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    flex-shrink: 0;
+    z-index: 20;
+}
+
+.header-logo { max-height: 40px; width: auto; }
+.header-titles h1 { margin: 0; font-size: 1.2rem; font-weight: 700; color: #ffffff; }
+.header-titles h2 { margin: 2px 0 0 0; font-size: 0.9rem; font-weight: 400; color: rgba(255, 255, 255, 0.85); }
+
+/* --- RODAPÉ --- */
+footer {
+    padding: 0.5rem 2rem;
+    background-color: #343a40;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 20; /* Garante que o rodapé fique acima de outros conteúdos se houver sobreposição */
+}
+.footer-left, .footer-right { flex: 0 1 150px; }
+.footer-center { flex-grow: 1; text-align: center; color: var(--color-text-light); white-space: nowrap; }
+.footer-center p { margin: 0; }
+.footer-left { text-align: left; }
+.btn-contact { background-color: #495057; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; font-size: 0.8rem; }
+.btn-contact:hover { background-color: #6c757d; }
+
+/* --- ÁREA DE CONTEÚDO PRINCIPAL (COM ROLAGEM) --- */
+main {
+    flex-grow: 1; /* Faz esta área crescer e ocupar o espaço entre o header e o footer */
+    overflow-y: auto; /* Apenas esta área terá rolagem vertical */
+    display: flex; /* Adicionado para centralizar seu conteúdo interno */
+    flex-direction: column; /* Adicionado para centralizar seu conteúdo interno */
+}
+
+/* --- CONTAINER DA LINHA DO TEMPO (PÁGINA PRINCIPAL) --- */
+.timeline-container {
+    position: relative;
+    padding: 30px 0;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+/* ... (demais regras da timeline continuam iguais) ... */
+.timeline-container::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 3px; height: 100%; background-color: #e9ecef; border-radius: 1.5px; }
+.timeline-item { padding: 8px 30px; position: relative; width: 50%; box-sizing: border-box; }
+.timeline-item:nth-child(even) { left: 50%; }
+.timeline-icon { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background-color: var(--color-primary); border: 2px solid var(--color-page-bg); z-index: 10; display: flex; align-items: center; justify-content: center; }
+.timeline-item:nth-child(odd) .timeline-icon { right: -20px; }
+.timeline-item:nth-child(even) .timeline-icon { left: -20px; }
+.timeline-icon svg { width: 20px; height: 20px; fill: #fff; }
+.timeline-content { padding: 15px; background-color: #fff; border: 1px solid #dee2e6; border-radius: 6px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); position: relative; cursor: pointer; transition: all 0.3s ease; }
+.timeline-content:hover { transform: translateY(-4px); box-shadow: 0 6px 12px rgba(0,0,0,0.08); }
+.timeline-content h3 { margin-top: 0; font-size: 1.1rem; color: var(--color-primary); }
+.timeline-content p { margin-bottom: 0; font-size: 0.85rem; color: #6c757d; }
+.timeline-content::before { content: ''; position: absolute; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-style: solid; }
+.timeline-item:nth-child(odd) { text-align: right; }
+.timeline-item:nth-child(odd) .timeline-content::before { right: -8px; border-width: 8px 0 8px 8px; border-color: transparent transparent transparent #dee2e6; }
+.timeline-item:nth-child(even) .timeline-content::before { left: -8px; border-width: 8px 8px 8px 0; border-color: transparent #dee2e6 transparent transparent; }
+
+
+/* --- ESTILOS PARA PÁGINAS DE DETALHE --- */
+.detail-page-body {
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+    width: 100%; /* Garante que o corpo ocupe toda a largura da área de rolagem */
+    flex-grow: 1; /* Faz o corpo crescer para preencher o 'main' verticalmente */
+}
+.detail-header {
+    padding: 12px 30px;
+    border-bottom: 1px solid #dee2e6;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0; 
+    z-index: 19;
+}
+.detail-title { color: var(--color-primary); margin: 0; font-size: 1.3rem; text-align: center; flex-grow: 1; }
+.nav-group { display: flex; align-items: center; gap: 8px; flex: 1; }
+.nav-group.right { justify-content: flex-end; }
+.nav-group.left { justify-content: flex-start; }
+.nav-btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; width: 35px; height: 35px; border-radius: 50%; border: 1px solid #dee2e6; background-color: #fff; transition: all 0.2s ease; }
+.nav-btn:hover { background-color: #e9ecef; border-color: #ced4da; }
+.nav-btn svg { width: 20px; height: 20px; fill: var(--color-primary); }
+
+.detail-flowchart-container {
+    flex-grow: 1; /* Faz o container dos cards crescer */
+    display: flex;
+    flex-wrap: wrap; 
+    align-items: center; /* Alinha verticalmente */
+    justify-content: center; /* Alinha horizontalmente */
+    row-gap: 0px;    /* Define o espaço VERTICAL (reduzido pela metade) */
+    column-gap: 30px; /* Mantém o espaço HORIZONTAL original */
+    padding: 40px;
+}
+.process-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-top: 4px solid var(--color-primary);
+    border-radius: 8px;
+    padding: 25px 20px;
+    text-align: center;
+    width: 240px; 
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.process-card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.card-icon { color: var(--color-primary); margin-bottom: 15px; }
+.card-icon svg { width: 40px; height: 40px; }
+.card-title { font-size: 1rem; font-weight: bold; color: var(--color-text); }
+
+/* --- REFINAMENTO COMPLETO DA FASE DE ANÁLISE TÉCNICA --- */
+.process-group-wrapper { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.process-group-wrapper:has(.sub-step-group.visible) { width: 100%; max-width: 900px; }
+#validation-toggle.process-card { position: relative; z-index: 2; width: 240px; }
+.sub-step-group { display: none; border: 1px solid #e0e6ed; background-color: #f8f9fa; margin-top: -10px; padding: 25px 20px 20px 20px; width: 100%; position: relative; z-index: 1; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
+.sub-step-group.visible { display: block; }
+.sub-step-group h5 { color: var(--color-primary); font-weight: bold; text-align: center; margin-top: 0; margin-bottom: 20px; font-size: 1.1rem; }
+.sub-step-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; gap: 20px; }
+.sub-step-card { border-top-color: #E5B80B !important; box-shadow: 0 2px 8px rgba(0,0,0,0.05); flex: 1; min-width: 220px; }
+.sub-step-card .card-icon { color: #E5B80B; }
+
+/* --- MODAIS --- */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+.modal-overlay.visible { opacity: 1; visibility: visible; }
+.modal-content { background: var(--color-page-bg); padding: 25px; border-radius: var(--border-radius-main); box-shadow: 0 5px 15px rgba(0,0,0,0.3); max-width: 550px; width: 90%; transform: translateY(-50px); transition: transform 0.3s ease; }
+.modal-overlay.visible .modal-content { transform: translateY(0); }
+#modal-title, #contact-modal-title, #detail-modal-title { color: var(--color-primary); margin-top: 0; border-bottom: 1.5px solid var(--color-background); padding-bottom: 8px; margin-bottom: 15px; font-size: 1.1rem; }
+#modal-description, #detail-modal-description { line-height: 1.5; font-size: 0.9rem; }
+.modal-buttons { margin-top: 20px; display: flex; justify-content: center; gap: 8px; }
+.btn { border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; font-size: 0.9rem; }
+.btn-primary { background-color: var(--color-primary); color: #fff; }
+.btn-primary:hover { background-color: var(--color-secondary); }
+.btn-secondary { background-color: #e9ecef; color: #495057; }
+.btn-secondary:hover { background-color: #ced4da; }
+.contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.9rem; }
+.contact-item a { color: var(--color-secondary); text-decoration: none; font-weight: bold; }
+.contact-item a:hover { text-decoration: underline; }
+.contact-icon { flex-shrink: 0; width: 20px; height: 20px; fill: var(--color-primary); }
+
+/* --- Layout de Rolagem e Estilo da Barra de Rolagem --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: rgba(0, 0, 0, 0.2); border-radius: 10px; border: 2px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background-color: rgba(0, 0, 0, 0.5); }
+main { scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.2) transparent; }
